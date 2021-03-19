@@ -32,7 +32,8 @@ created() {
       fromDate:[],
       toDate:[]
     },
-fieldname:["EventDate","HourDate","MinuteDate","SecondDate","web_id","user_id","project_id","marka_id","event_id","owner_id","proposal_id","conversion_value"],
+fieldname:null,
+//["EventDate","HourDate","MinuteDate","SecondDate","web_id","user_id","project_id","marka_id","event_id","owner_id","proposal_id","conversion_value"],
 recieved:{
   'meta':[],
   'data':[]
