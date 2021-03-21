@@ -20,7 +20,7 @@ export default {
 created() {
   // GET request
   axios.get('http://localhost:8081/')             //замени localhost/getfielnames
-    .then(response => this.fieldname = response, this.startfieldnames = response);
+    .then(response => {this.fieldname = response.data; this.startfieldnames = response.data});
 },
     data() { 
 	return{
@@ -48,7 +48,12 @@ fieldname:null,
 result:[],
 recieved:{
   'meta':[],
-  'data':[]
+  'data':[],
+  'rows': null,
+  'rows_before_limit_at_least': null,
+  'statistics': null,
+  'transferred': null,
+
 }
   }
     },
@@ -135,11 +140,11 @@ onUnionAll(){
 
 
   console.log(this.result)
-  const article = this.request;
+  const article = this.result;
   const response = await axios.post("http://localhost:8081/search", article);  //замени localhost/api
     this.result = []
     this.recieved = response;
-    console.log(this.result)
+    console.log(this.recieved)
     this.temprequest={
       haveSubRequest: false,
       from: '',

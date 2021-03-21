@@ -18,13 +18,12 @@
 <script>
 export default { 
     name:"DatasForView",
-    props:["fieldname",'request',"fieldIndex"],
+    props:["fieldname",'request',"fieldIndex", "recieved"],
     data(){
         return{
-            selectedItem: null,
-            func:null,
+            selectedItem: 'null',
+            func:'null',
             show: true,
-            func: null,
         }
     },
 
@@ -38,7 +37,7 @@ export default {
 },
     methods:{
         submit(){
-            if(this.func == null && this.show){
+            if(this.func == 'null' && this.show){
                 let a ={
                     name:this.selectedItem.name,
                     type:this.selectedItem.type,
@@ -46,7 +45,7 @@ export default {
                 }
                 this.request.select.push(a)
                 }
-            if(this.func != null && this.show){
+            if(this.func != 'null' && this.show){
                 let b ={
                     name:this.selectedItem.name,
                     type:this.selectedItem.type,
@@ -58,7 +57,7 @@ export default {
         },
             restore(){
             this.show = false
-            this.selectedItem = this.inputField = null;
+            this.selectedItem = this.inputField = 'null';
         }
     },
 }

@@ -11,10 +11,10 @@
 <script>
 export default {
     name:'GroupBy',
-    props:["fieldname",'request','fieldIndex'],
+    props:["fieldname",'request','fieldIndex', 'recieved'],
         data(){
         return{
-            selectedItem: null,
+            selectedItem: 'null',
             show: true
              
         }
@@ -29,12 +29,12 @@ export default {
 },
     methods:{
         submit(){
-            if(this.selectedItem != '' && this.show){
+            if(this.selectedItem != 'null' && this.show){
                 this.request.group.push(this.selectedItem)
                 }
         },
         restore(){
-            this.selectedItem = null;
+            this.selectedItem = 'null';
             this.show = false
         }
     },    
