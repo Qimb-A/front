@@ -2,7 +2,7 @@
   <div id="app" >
     <div id="icon"> <div id="ria">RIA</div>
       <div id="analyt">analytics</div></div>
-      <MakeRequest @changefield ='onChangefield' @unionall='onUnionAll' @union='onUnion' @submit="onSubmit" v-bind:fieldname="fieldname" v-bind:request="request" v-bind:result="result" v-bind:temprequest="temprequest" v-bind:tempfield="tempfield"/>
+      <MakeRequest v-bind:tempnames="tempnames" @changefield ='onChangefield' @unionall='onUnionAll' @union='onUnion' @submit="onSubmit" v-bind:fieldname="fieldname" v-bind:request="request" v-bind:result="result" v-bind:temprequest="temprequest" v-bind:tempfield="tempfield"/>
       <RecievedData v-bind:recieved="recieved"/>
   </div>
 </template>
@@ -24,6 +24,8 @@ created() {
 },
     data() { 
 	return{
+
+    tempnames:[],
     request:{
       haveSubRequest: false,
       from: '',
@@ -46,15 +48,7 @@ startfieldnames:null,
 tempfield:[[]],
 fieldname:null,
 result:[],
-recieved:{
-  'meta':[],
-  'data':[],
-  'rows': null,
-  'rows_before_limit_at_least': null,
-  'statistics': null,
-  'transferred': null,
-
-}
+recieved:null,
   }
     },
 methods:{
@@ -125,11 +119,8 @@ onUnionAll(){
 
 },
 
-
-
-
-
   async onSubmit(){
+    console.log(this.tempnames)
     if(this.temprequest.haveSubRequest){
     this.result.push(this.temprequest)
     this.fieldname = this.startfieldnames
@@ -142,8 +133,14 @@ onUnionAll(){
   console.log(this.result)
   const article = this.result;
   const response = await axios.post("http://localhost:8081/search", article);  //замени localhost/api
+    if(response.data.hasOwnProperty){
+      console.log("error")
+      this.recieved = 'error'
+    }
+    else{
+      this.recieved = response.data;
+    }
     this.result = []
-    this.recieved = response;
     console.log(this.recieved)
     this.temprequest={
       haveSubRequest: false,
